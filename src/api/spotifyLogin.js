@@ -8,6 +8,7 @@ const scope = [
   "user-top-read",
   "user-modify-playback-state",
   "user-read-playback-state",
+  "playlist-modify-public"
 ];
 
 export const loginURL = `https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(

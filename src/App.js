@@ -5,6 +5,9 @@ import Home from "./pages/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchResults from "./pages/SearchResults.jsx";
+import Player from "./components/Player.jsx";
+import apiService from "./api/apiService.js";
+
 
 export const StateContext = createContext(null);
 
@@ -29,10 +32,28 @@ function App() {
     setToken("");
   };
 
+  useEffect(() => {
+    const fetchTracks = async () => {
+      try {
+        const data = await apiService.get(`me/playlists`, {
+          Authorization: "Bearer " + token,
+        });
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching tracks:", error);
+      }
+    };
+
+    fetchTracks();
+  }, [token])
+
+
   return (
     <StateContext.Provider
       value={{
         logout,
+        token,
       }}
     >
       <div className="h-screen w-full">
@@ -43,6 +64,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<SearchResults />} />
             </Routes>
+            <Player />
           </Router>
         ) : (
           <Login />

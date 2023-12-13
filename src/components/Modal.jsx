@@ -17,14 +17,25 @@ const Modal = ({ btnText, id_modal, children }) => {
 
   return (
     <div>
-      <label htmlFor={id_modal} className="btn" onClick={openModal}>
-        {btnText}
+      <label htmlFor={id_modal} className="block" onClick={openModal}>
+        <button className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-stone-700">
+          {btnText}
+        </button>
       </label>
 
-      <input type="checkbox" id={id_modal} className="modal-toggle" checked={isVisible} />
+      <input
+        type="checkbox"
+        id={id_modal}
+        className="modal-toggle"
+        checked={isVisible}
+      />
       <div className={`modal ${isVisible ? "visible" : ""}`} role="dialog">
         <div className="modal-box">{childrenWithProps}</div>
-        <label className="modal-backdrop" htmlFor={id_modal} onClick={closeModal}>
+        <label
+          className="modal-backdrop"
+          htmlFor={id_modal}
+          onClick={closeModal}
+        >
           Close
         </label>
       </div>
